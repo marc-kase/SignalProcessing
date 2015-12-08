@@ -3,9 +3,9 @@ package fft.fft;
 
 import fft.math.Complex;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /******************************************************************************
  * Compilation:  javac FFT.java
@@ -197,8 +197,24 @@ public class FFT {
      * 4.01805098805014E-17i
      ***************************************************************************/
 
+    public static Complex[] readData() throws IOException {
+        List<Complex> cs = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader("data/source.csv"));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            for (String str : values) {
+                System.out.println(str);
+                cs.add(new Complex(Double.parseDouble(str), 0));
+            }
+        }
+        br.close();
+        return cs.toArray(new Complex[cs.size()]);
+    }
+
     public static void main(String[] args) throws IOException {
-        int N = Integer.parseInt(args[0]);
+/*        int N = Integer.parseInt(args[0]);
         Complex[] x = new Complex[N];
 
         // original data
@@ -206,7 +222,9 @@ public class FFT {
             double re = 2 * Math.sin(Math.PI * i / 3) + 2 * Math.sin(Math.PI * i / 9) + 2 * Math.sin(Math.PI * i / 18)
                     + 2 * Math.sin(Math.PI * i / 36);
             x[i] = new Complex(re, 0);
-        }
+        }*/
+
+        Complex[] x = readData();
         show(x, "x");
 
         // FFT of original data
