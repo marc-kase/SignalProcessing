@@ -214,7 +214,7 @@ public class FFT {
     }
 
     public static void main(String[] args) throws IOException {
-/*        int N = Integer.parseInt(args[0]);
+        int N = Integer.parseInt(args[0]);
         Complex[] x = new Complex[N];
 
         // original data
@@ -222,9 +222,9 @@ public class FFT {
             double re = 2 * Math.sin(Math.PI * i / 3) + 2 * Math.sin(Math.PI * i / 9) + 2 * Math.sin(Math.PI * i / 18)
                     + 2 * Math.sin(Math.PI * i / 36);
             x[i] = new Complex(re, 0);
-        }*/
+        }
 
-        Complex[] x = readData();
+//        Complex[] x = readData();
         show(x, "x");
 
         // FFT of original data

@@ -23,10 +23,10 @@ package fft.fft;
   */
 
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FFT_CU {
 
@@ -155,14 +155,35 @@ public class FFT_CU {
         }
     }
 
+    public static Double[] readData() throws IOException {
+        List<Double> cs = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader("data/source.csv"));
+        String line;
 
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            for (String str : values) {
+                System.out.println(str);
+                cs.add(Double.parseDouble(str));
+            }
+        }
+        br.close();
+        return cs.toArray(new Double[cs.size()]);
+//        return cs;
+    }
 
 
     // Test the FFT_CU to make sure it's working
     public static void main(String[] args) throws IOException {
         long time = new Date().getTime();
 
-        int N = 32768;
+        Double[] signal = readData();
+
+//        int N = signal.size();
+
+        int N = 8192;
+
+        System.out.println("Size = " + N);
 
         FFT_CU fft = new FFT_CU(N);
 
@@ -183,13 +204,21 @@ public class FFT_CU {
         }
         beforeAfter(fft, re, im);*/
 
-        double T = 2.0;
+/*        double T = 2.0;
         for(int i=0; i<N; ++i) {
             re[i] = Math.cos(2048.0*Math.PI*i*T/N) +
                     Math.cos(4096.0*Math.PI*i*T/N) +
                     Math.cos(8192.0*Math.PI*i*T/N);
             im[i] = 0.0;
+        }*/
+
+        int shift = 4000;
+        for(int i=shift; i<N+shift; ++i) {
+            re[i-shift] = signal[i];
+            im[i-shift] = 0.0;
         }
+
+
 //        beforeAfter(fft, re, im);
 
         writeAbsData(fft, re, im);
@@ -239,7 +268,7 @@ public class FFT_CU {
 
     private static void writeAbsData(FFT_CU fft, double[] re, double[] im) throws IOException {
         fft.fft(re, im);
-        FileWriter writer = new FileWriter(new File("/home/mark/Tmp/data.abs"));
+        FileWriter writer = new FileWriter(new File("data/data.abs"));
         double[] y1 = new double[re.length];
         System.out.println("Length: " + re.length);
         for (int i = 0; i < re.length; i++) {

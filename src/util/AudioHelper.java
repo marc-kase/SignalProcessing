@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class AudioHelper {
-        public static void audio2(String args[]) throws IOException {
+        public static void main(String args[]) throws IOException {
             File WAV_FILE = new File("/home/cybersecurity/Desktop/scream2.wav");
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             AudioInputStream in = null;
@@ -30,7 +30,7 @@ public class AudioHelper {
             }
             out.flush();
             byte[] audioBytes = out.toByteArray();
-
+            System.out.println();
 
         }
 }
