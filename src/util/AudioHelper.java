@@ -1,36 +1,51 @@
 package util;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
 public class AudioHelper {
-        public static void main(String args[]) throws IOException {
-            File WAV_FILE = new File("/home/cybersecurity/Desktop/scream2.wav");
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            AudioInputStream in = null;
-            try {
-                in = AudioSystem.getAudioInputStream(WAV_FILE);
-            } catch (UnsupportedAudioFileException e) {
+    public static AudioFileFormat.Type targetType = AudioFileFormat.Type.SND;
 
-                e.printStackTrace();
-            } catch (IOException e) {
+    public static void main(String args[]) throws IOException, UnsupportedAudioFileException {
 
-                e.printStackTrace();
-            }
+        String source = "data/Piano.pp.B0.aiff";
+        String target = "data/out.txt";
 
+        File file = new File(source);
+        AudioInputStream in= AudioSystem.getAudioInputStream(file);
+        AudioInputStream ais = AudioSystem.getAudioInputStream(in);
 
-            int read, i;
-            byte[] buff = new byte[1024];
-            while ((read = in.read(buff)) > 0) {
-                out.write(buff, 0, read);
-            }
-            out.flush();
-            byte[] audioBytes = out.toByteArray();
-            System.out.println();
-
+        int read;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buff = new byte[1024];
+        while ((read = in.read(buff)) > 0) {
+            out.write(buff, 0, read);
         }
+        out.flush();
+
+/*        File WAV_FILE = new File("data/Piano.pp.B0.aiff");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        AudioInputStream in = null;
+        try {
+            in = AudioSystem.getAudioInputStream(WAV_FILE);
+        } catch (UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+
+
+        int read;
+        byte[] buff = new byte[1024];
+        while ((read = in.read(buff)) > 0) {
+            out.write(buff, 0, read);
+        }
+        out.flush();
+
+        FileWriter fw = new FileWriter(new );
+        byte[] audioBytes = out.toByteArray();
+        for (int i = 0; i < audioBytes.length; i++) {
+            System.out.print((double) audioBytes[i] + ",");
+        }*/
+    }
 }
