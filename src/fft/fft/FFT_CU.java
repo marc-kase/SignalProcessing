@@ -30,8 +30,8 @@ import java.util.List;
 
 public class FFT_CU {
 
-    public static final int FREQ = 16384/2;
-    public static int N = 16384/4;
+    public static final int FREQ = 32768/2;
+    public static int N = 32768/4;
     int n, m;
 
     // Lookup tables.  Only need to recompute when size of FFT_CU changes.
@@ -289,5 +289,5 @@ public class FFT_CU {
         System.out.println("MaxFrq: " + max_i* FREQ /re.length);
     }
 
-    //* todo Length == Freq/2
+    //* todo+++++++++++++++++++ Length == Freq/2
 }
