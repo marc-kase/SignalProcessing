@@ -28,6 +28,9 @@ fun pow(x: Complex): Double {
 }
 
 fun toFreq(k: Int, N: Int, fs: Double): Double {
+    //    k - decomposition level
+    //    N - sample size
+    //    fs - sampling frequency
     return k * fs / N
 }
 
