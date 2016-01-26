@@ -2,6 +2,7 @@ package fft.fft;
 
 /**
  * @author Orlando Selenu
+ * http://www.wikijava.org/wiki/The_Fast_Fourier_Transform_in_Java_(part_1)
  *
  */
 public class FFTbase {

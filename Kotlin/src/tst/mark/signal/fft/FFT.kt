@@ -175,10 +175,10 @@ class FFT {
     }
 }
 
-fun main(args: Array<String>) {
+/*fun main(args: Array<String>) {
 //    FFT().fft(signal)
     FFT().calc(sRe)
 
     for (i in reX.indices)
         println("${reX[i]} ${imX[i]}")
-}
+}*/
